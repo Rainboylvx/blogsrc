@@ -85,6 +85,7 @@ STL 可以说是 **数据结构** + **算法** 的结合,其中STL为了实现**
 | c.erase(pos)         | 删除pos位置的数据,返回下一个数据的位置             |
 | c.erase(begin,end)   | 删除[begin,end)之决的数据,返回下一个数据的位置     |  
 | **迭代器**               |                                                    |
+|vector<T>::iterator i 	| 申请一个迭代器 i 		|
 | c.begin()            | 指向第一个元素的迭代器                             |
 | c.end()              | 指向最后一个元素后面一个位置的迭代器               |
 | c.rebegin()          | 指向反向的第一个数据                               |
@@ -103,7 +104,7 @@ STL 可以说是 **数据结构** + **算法** 的结合,其中STL为了实现**
  
  
  
-### vector代码联系
+### vector代码练习
 
 
 #### 代码1
@@ -139,13 +140,82 @@ int main(int argc,char **argv)
 #### 代码2
 
 ```
-#include  <iostream>
-#include  <
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+int a[] = {1,2,3,4,5,6,7};
+
+void print(vector<int> &vec){
+	vector<int>::iterator i ;
+	for(i = vec.begin();i!=vec.end();i++)
+	{
+		cout << *i <<' ';
+	}
+	cout << endl;
+}
+
+int main(){
+	//使用数组初始化,a是数组的开头的指针,a+sizeof(a)/sizeof(a[0]) 数组末尾指针的一下个位置
+	vector<int> v1(a,a+sizeof(a)/sizeof(a[0]));
+	// 使用迭代器来输出v1
+	vector<int>::iterator i ;
+	for(i = v1.begin();i!=v1.end();i++)
+	{
+		cout << *i <<' ';
+	}
+	cout << endl;
+	
+	//使用push_back 添加值
+	int j;
+	for(j=10;j<=16;j++)
+		v1.push_back(j);
+	//输出
+	print(v1);
+	
+	//弹出所有值
+	for(;!v1.empty();){
+		cout << v1.back() << ' ';//c.back() 返回最后一个元素的值
+		v1.pop_back();//注意 pop_back 不会返回 弹出的值
+	}
+	print(v1);//输出空的一行
+	
+	/* 使用[] 下标来操作vector*/
+	for(j=1;j<=16;j++)
+		v1.push_back(j);
+	for(j=0;j<=15;j++) // 注意 下标从0开始,且下标只能操作已存在的值
+		cout << v1[j] << ' ' ;
+	
+	return 0;
+}
 ```
 
 ### cojs 明明随机数
 
+```
 
+/* 代码没有提交测试 */
+#include <iostream>
+#include <vector>
+using namespace std;
+
+int n;
+vector<int> vec(1001,0);
+int main(){
+	cin >> n;
+	int i;
+	int tmp;
+	for(i=1;i<=n;i++){
+		scanf("%d",&tmp);
+		vec[tmp] =1;
+	}
+	for(i=1;i<=1000;i++)
+		if(vec[i])
+			cout << vec[i];
+	return 0;
+}
+```
 
 
 ### 总结 
