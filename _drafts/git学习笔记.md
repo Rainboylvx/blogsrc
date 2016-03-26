@@ -27,13 +27,62 @@ merge 合并两个branch(当然是从分支指针开始merge),
 ## git命令学习
 
 
-| git commit         | 提交增量,产生一个新的结点 [1]                              |
-| git branch         | 创建或切换到已有分支                                       |
-| git merge          | 合并,会把两不同的结点 并为一个孩子,也就是包含所有修改      |
-| git rebase <dst>   | 取一系列commit点,copy,在别的某个点放下,能到列线性的history |
-| HAED               | 指向当前commit点的指针,最近一次提交记录                    |
-| git checkout <dst> | 移动HEAD 到dst,HEAD^^,HEAD~1                               |
+| git commit                      | 提交增量,产生一个新的结点 [1]                           |
+| git branch                      | 创建或切换到已有分支                                    |
+| git merge                       | 合并,会把两不同的结点 并为一个孩子,也就是包含所有修改   |
+| git rebase <dst>                | 取一系列commit点,copy,在别的dst放下,能到列线性的history |
+| git rebase <src> <dst>          |                                                         |
+| HAED                            | 指向当前commit点的指针,最近一次提交记录                 |
+| git checkout <dst>              | 移动HEAD 到dst,HEAD^^,HEAD~1                            |
+| git branch -f <branch> <dst>    | 强行移到分支到某个点                                    |
+| HEAD^,HEAD~1,branch^,branch~1   | 祖先结点                                                |
+| git reset HEAD^                 | 把当前分支记录退回到某个点                              |
+| git revert HEAD                 | 回退,眀会重新生成一个commit                             |
+| git cherry-pick <c1> <c2 <c3>   | 复制commit到当前HEAD下面                                |
+| git rebase -i HEAD~4 --abvoeAll | 会有一个UI来手动选择                                    |
+| git commit --amend              | 可以使用 git commit --amend 修改上一次的提交信息。      |
+| git tags  <tag> <commit>        | 见下面                                                  |
+| git describe                    | 显示离HEAD最近的tag                                     |
+| git checkout HEAD^2             | 多个父亲时,选第二个父亲                                 |
+| git fetch                       | 下载远程分支                                            |
+| git pull                        | 下载并merge                                             |
+| git pull -rebase                | 将远端的新提交fetch来,本地rebase到o/master上            |
+|git b
 
+
+git cherry-pick origin/master
+git rebase origin/master
+git merge origin/master
+
+
+remotes track
+1. 远端分支分出一个branch
+git checkout -b totallyNotMaster origin/master
+2.
+git checkout -u origin/master totallyNotMaster
+
+
+git push 参数
+git push <remote> <place>
+git push origin <src>:<dst>
+如果<dst>不存在,那就会在远程程创建一个new branch,如果<src>为空 会删除远程的分支
+
+git fetch
+
+
+git tag  : 永远指向某个特定的commit,有新的commit里,
+git checkout <tagname> 到tagname的点
+http://blog.csdn.net/wangjia55/article/details/8793577
+
+git describe <ref>  ref 是一个位置commit
+
+git revert :回退某次提交,并重新提交,相当于代码恢复修改前,也就说revert也是一个commit,只是比较特殊,会修改某些操作
+git reset :回退到某次提交,同时回退修改log,但是修改内容回退到本地local buffer,由用户确定是不是checkout丢弃
+
+
+gitk
+git log 
+    --pretty=oneline
 
 
 ### git 处理冲突
