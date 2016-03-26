@@ -62,6 +62,10 @@ git checkout -b totallyNotMaster origin/master
 git checkout -u origin/master totallyNotMaster
 
 
+Git 手动建立tracking 
+
+git branch --set-upstream <local> origin/<remote>
+
 git push 参数
 git push <remote> <place>
 git push origin <src>:<dst>
