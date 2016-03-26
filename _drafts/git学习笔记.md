@@ -66,6 +66,19 @@ Git 手动建立tracking
 
 git branch --set-upstream <local> origin/<remote>
 
+更新现在分支track remote
+git branch --set-upstreamto=origin/<remote>
+
+
+把本地分支 push 到一个新的remote 并track
+git push -u origin dev:dev
+
+
+创建一个运程分支一样名字并track 切换
+git checkout --track origin/dev
+
+git reset --hard HEAD^
+
 git push 参数
 git push <remote> <place>
 git push origin <src>:<dst>
@@ -112,3 +125,11 @@ git branch -f master HEAD
 因为分支名也是指针,没有指针指向的分支会不见!?
 上面说的可能不太对?因使用gitk 和 git log 都看不到,但是使用Git gui 可以看到前三条命令的history!! 难受
 ```
+
+
+### 乱码解决
+
+在.gitconfig文件中修改或添加如下配置：
+[core]
+quotepath = false
+作用：没有这一条，$git status输出中文会显示为UNICODE编码。
