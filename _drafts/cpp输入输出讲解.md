@@ -72,6 +72,181 @@ printf("%1.2f",11.11111)
 | s    | char *         | 字符串                                   |
 
 
+width:
+是一个可选的指定最小值字段宽度的十进制数字字符串。如果转换值字符少于字段宽度，该字段将从左到右按指定的字段宽度填充。如果指定了左边调整选项，字段将在右边填充。如果转换结果宽于字段宽度，将扩展该字段以包含转换后的结果。不会发生截断。然而，小的精度可能导致在右边发生截断。
+
+prec:
+用于控制小数点后面的位数，取值和含义如下：缺省精度0,其它精度n(1,2,3,4...)
+
+| 转义字符 | 作用                       |
+|----------|----------------------------|
+| \n       | 换行                       |
+| \\       | 一个\                      |
+| \'       | 一个'                      |
+| \"       | 一个"                      |
+| \xhh     | hh二位的16进制所代表的字符 |
 
 
+ > **注意:** 上面说了那么多,是不是都要记住,不要,我们只要知道有这些东西就行了,具休只要下面的代码有看懂就行
+
+
+#### 代码举例
+
+```
+#include <cstdio>
+int main(){
+    double a=1123.123456;
+    int b =12;
+    printf("%6.2f\n",a);
+    printf("%d\n",b);
+    printf("%4d\n",b);
+    printf("%-4d\n",b);
+    printf("%04d\n",b);
+    printf("%4.4d\n",b);
+    printf("my favrite num is :%d\n",9);
+    printf("%03d %c,%f hh %s",12,'A',1.1,"RAINBOY");
+    return 0;
+}
+```
+
+结果是
+
+```
+1123.12
+12
+  12
+12
+0012
+0012
+my favrite num is :9
+012 A,1.100000 hh RAINBOY
+```
+
+
+### scanf 的使用
+ scanf() 是从标准输入流stdio (标准输入设备，一般是键盘)中读内容的通用子程序，可以说明的格式读入多个字符，并保存在对应地址的变量中。[
+
+ 调用方式:
+
+<center>scanf("参数表",变量地址)</center>
+
+ 简单的来说就是从console里读取,下面几个问题我们要知道:
+
+ - %d读取的时候会把不可见的字符略去
+ - 你在console输入数据的时候,按下回车的时候,才把数据提交
+ - 定 %d%d%d 之间最好不要有其它东西
+
+
+#### 代码
+
+```
+#include<stdio>
+int main(void)
+{
+int a,b,c;
+printf("输入a,b,c\n");
+scanf("%d%d%d",&a,&b,&c);
+printf("a=%d,b=%d,c=%d\n",a,b,c);
+return 0;
+}
+```
+
+基本会写上面的这个代码就会能写90%以上的题目了,如果在写题目真的遇到了怎么办?看这个[百度百科](http://baike.baidu.com/link?url=1f3edcVHlc0ey2QsxEHi9zDDB8HwwYWmXMUgP0HZM1CDDE-PD5Yr8mUV5dTDlJAI8kaiu2hDHACfLOh3avWQS_)
+
+下面的这些要撑握:
+
+1.读取到文件地末尾:
+
+2.读取一行字符:
+
+3.读取一行数字:
+
+## cin cout 的使用
+
+要包含头文件:`<iostream>`,要写这句话:`using namespace std;`
+
+
+cout语句的一般格式为：`cout<<表达式1<<表达式2<<……<<表达式n;`
+
+cin语句的一般格式为：`cin>>变量1>>变量2>>……>>变量n;`
+
+这里说一下对理解:把cout想像成cout 想象成console, `<<`表示一个流向,会把数据流向cout,而cout就是console,现时`<<`操作完后会返回cout,所以可以写成一个长链,cin同理,只不过把cin当成键盘.
+
+与printf相比,如果我想输出一行话,只要写一个长链串起来就可以了.
+
+```
+cout << "hello word" << 10 << ' ' << endl;
+```
+
+### cin cout 控制符
+
+`#include <iomanip>`
+
+
+| dec             | %d                    |
+| hex             | %x                    |
+| oct             | %o                    |
+| setfill('c')    | 填充字符为c           |
+| setw(n)         | 宽度为n               |
+| setprecision(b) | 浮点数小数部分长度为n |
+
+#### 代码
+
+```
+/*一个按进制输出的例子*/
+
+#include<iostream.h>
+
+void main()
+
+{
+
+int x=30, y=300, z=1024;
+
+cout<<x<<' '<<y<<' '<<z<<endl; //按十进制输出
+
+cout.unsetf(ios::dec ); //取消十进制输出设置
+
+cout.setf(ios::showbase | ios::uppercase); //设置基指示符输出和数值中的字母大写输出
+
+cout<<x<<' '<<y<<' '<<z<<endl;
+
+cout.unsetf(ios::showbase | ios::uppercase); //取消基指示符输出和数值中的字母大写输出
+
+cout.setf(ios::oct); //设置为八进制输出,此设置不取消一直有效
+
+cout<<x<<' '<<y<<' '<<z<<endl; //按八进制输出
+
+cout.setf(ios::showbase | ios::uppercase); //设置基指示符输出和数值中的字母大写输出
+
+cout<<x<<' '<<y<<' '<<z<<endl;
+
+cout.unsetf(ios::showbase | ios::uppercase); //取消基指示符输出和数值中的字母大写输出
+
+cout.unsetf(ios::oct); //取消八进制输出设置，恢复按十进制输出
+
+cout.setf(ios::hex); //设置为十六进制输出
+
+cout<<x<<' '<<y<<' '<<z<<endl;
+
+cout.setf(ios::showbase | ios::uppercase); //设置基指示符输出和数值中的字母大写输出
+
+cout<<x<<' '<<y<<' '<<z<<endl;
+
+cout.unsetf(ios::showbase | ios::uppercase); //取消基指示符输出和数值中的字母大写输出
+
+cout.unsetf(ios::hex); //取消十六进制输出设置，恢复按十进制输出
+
+cout<<x<<' '<<y<<' '<<z<<endl;
+
+} 
+```
+
+
+##FAQ:算法竞赛的时候用cin cout输入输出比用scanf printf慢多少？
+
+ - https://www.zhihu.com/question/27831271/answer/38379464
+ - https://www.byvoid.com/blog/fast-readfile
+
+## 要善用网络
 
